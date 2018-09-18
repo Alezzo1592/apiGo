@@ -1,7 +1,8 @@
 package dao
 
 import(
-	"database/sql"
+	"apiGo/src/api/domain"
+	"database/sql";
 )
 var queryUser = "Select * from User where id= ?"
 func GetUser(key string)*domain.User{
@@ -13,9 +14,9 @@ func getUser(key string , query string)*domain.User{
 	if err != nil {
 		panic(err.Error())
 	}
-	var user *domain.User
-	err = db.QueryRow(query, key).Scan(user)
+	var user =domain.User{}
+	err = db.QueryRow(query, key).Scan(&user)
 
 	defer db.Close()
-	return user
+	return &user
 }
